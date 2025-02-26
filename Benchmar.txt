@@ -1,0 +1,38 @@
+import time
+import matplotlib.pyplot as plt
+import random
+
+sizes = [10, 100, 1000, 10000]
+best_times = []
+worst_times = []
+average_times = []
+
+for size in sizes:
+  best_case = generate_best_case(size)
+  worst_case = generate_worst_case(size)
+  average_case = generate_average_case(size) 
+
+  #timing best case
+  start_time = time.time()
+  quicksort_non_random(best_case)
+  best_times.append(time.time() - start_time)
+
+  #timing worst case
+  start_time = time.time()
+  quicksort_non_random(worst_case)
+  worst_times.append(time.time() - start_time)
+
+  #timing average case
+  start_time = time.time()
+  quicksort_non_random(average_case)
+  average_times.append(time.time() - start_time)
+
+#for plotting the results
+plt.plot(sizes, best_times, label= 'Best Case')
+plt.plot(sizes, worst_times, label= 'Worst Case')
+plt.plot(sizes, average_times, label= 'Average Case')
+plt.xlabel('Input Size (n)')
+plt.ylabel('Time (Seconds)')
+plt.legend()
+plt.title('Quicksort Benchmarking')
+plt.show()
